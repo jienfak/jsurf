@@ -2014,7 +2014,7 @@ search(Client *c, Arg *a)
 		case REG_NOMATCH: fprintf(stderr, "search: regexec: No matches found.\n");return;
 		default:
 			regerror(reti, &regex, msg, sizeof(msg));
-			fprintf(stderr, "search: regexec: Regex match failed '%s'.\n", msg);
+			fprintf(stderr, "xsrf: search: regexec: Regex match failed '%s'.\n", msg);
 			return;
 	}
 
@@ -2030,7 +2030,7 @@ search(Client *c, Arg *a)
 		}
 	}
 	if (!gotf){
-		fprintf(stderr, "search: Could not find prefix.");
+		fprintf(stderr, "xsrf: search: Could not find prefix.\n");
 		return;
 	}
 
