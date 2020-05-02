@@ -7,6 +7,8 @@ ROOT = $USR/local
 LIBROOT = $ROOT/lib
 LIBDIR = $LIBROOT/$NAME
 
+MANROOT = $ROOT/share/man/man1
+
 USRLIB = $USR/lib
 USRINC = $USR/include
 

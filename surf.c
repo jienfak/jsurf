@@ -1,6 +1,6 @@
 /* See LICENSE file for copyright and license details.
  *
- * To understand surf, start reading main().
+ * To understand xsrf, start reading main().
  */
 #include <sys/file.h>
 #include <sys/types.h>
@@ -316,7 +316,7 @@ static ParamName loadfinished[] = {
 void
 usage(void)
 {
-	die("usage: surf [-bBdDfFgGiIkKmMnNpPsStTvwxX]\n"
+	die("usage: xsrf [-bBdDfFgGiIkKmMnNpPsStTvwxX]\n"
 	    "[-a cookiepolicies ] [-c cookiefile] [-C stylefile] [-e xid]\n"
 	    "[-r scriptfile] [-u useragent] [-z zoomlevel] [uri]\n");
 }
@@ -1134,7 +1134,7 @@ newview(Client *c, WebKitWebView *rv)
 
 		if (strcmp(fulluseragent, "")) {
 			webkit_settings_set_user_agent(settings, fulluseragent);
-		} else if (surfuseragent) {
+		} else if (xsrfuseragent) {
 			webkit_settings_set_user_agent_with_application_details(
 			    settings, "Surf", VERSION);
 		}
@@ -1227,13 +1227,13 @@ readpipe(GIOChannel *s, GIOCondition ioc, gpointer unused)
 
 	if (g_io_channel_read_chars(s, msg, sizeof(msg), NULL, &gerr) !=
 	    G_IO_STATUS_NORMAL) {
-		fprintf(stderr, "surf: error reading pipe: %s\n",
+		fprintf(stderr, "xsrf: error reading pipe: %s\n",
 		        gerr->message);
 		g_error_free(gerr);
 		return TRUE;
 	}
 	if ((msgsz = msg[0]) < 3) {
-		fprintf(stderr, "surf: message too short: %d\n", msgsz);
+		fprintf(stderr, "xsrf: message too short: %d\n", msgsz);
 		return TRUE;
 	}
 
@@ -1869,12 +1869,12 @@ msgext(Client *c, char type, const Arg *a)
 	if ((ret = snprintf(msg, sizeof(msg), "%c%c%c%c",
 	                    4, c->pageid, type, a->i))
 	    >= sizeof(msg)) {
-		fprintf(stderr, "surf: message too long: %d\n", ret);
+		fprintf(stderr, "xsrf: message too long: %d\n", ret);
 		return;
 	}
 
 	if (pipeout[1] && write(pipeout[1], msg, sizeof(msg)) < 0)
-		fprintf(stderr, "surf: error sending: %.*s\n", ret-2, msg+2);
+		fprintf(stderr, "xsrf: error sending: %.*s\n", ret-2, msg+2);
 }
 
 void
@@ -2168,7 +2168,7 @@ main(int argc, char *argv[])
 		fulluseragent = EARGF(usage());
 		break;
 	case 'v':
-		die("surf-"VERSION", see LICENSE for © details\n");
+		die("xsrf-"VERSION", see LICENSE for © details\n");
 	case 'w':
 		showxid = 1;
 		break;

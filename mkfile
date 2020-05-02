@@ -17,7 +17,7 @@ OBJ = ${SRC:%.c=%.o}
 COBJ = ${CSRC:%.c=%.o}
 
 HDR = `{ ls *.h }
-TGT = $NAME\
+TGT = $NAME
 
 WESRC = lib$NAME-webext.c
 WEOBJ = ${WESRC:%.c=%.o}
@@ -47,7 +47,7 @@ install : $TGT $WETGT
 	chmod 0755 $ROOT/bin/$TGT 
 	cp -f $WETGT $LIBDIR
 	chmod 644 $LIBDIR/$WETGT
-	sed s/VERSION/$VERSION/g < $NAME.1 > $ROOT/share/man1/$NAME.1
+	sed s/VERSION/$VERSION/g < $NAME.1 > $MANROOT/$NAME.1
 	chmod 644 $ROOT/share/man1/$NAME.1
 uninstall: 
 	rm -f $ROOT/share/man/man1/$TGT.1 $ROOT/bin/$TGT \

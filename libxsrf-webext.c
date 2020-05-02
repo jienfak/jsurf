@@ -39,7 +39,7 @@ newpage(WebKitWebPage *page)
 }
 
 static void
-msgsurf(Page *p, const char *s)
+msgxsrf(Page *p, const char *s)
 {
 	static char msg[MSGBUFSZ];
 	size_t sln = strlen(s);
@@ -119,7 +119,7 @@ webkit_web_extension_initialize_with_user_data(WebKitWebExtension *e, GVariant *
 	g_signal_connect(e, "page-created", G_CALLBACK(webpagecreated), NULL);
 
 	g_variant_get(gv, "(ii)", &pipein, &pipeout);
-	msgsurf(NULL, "i");
+	msgxsrf(NULL, "i");
 
 	gchanpipe = g_io_channel_unix_new(pipein);
 	g_io_channel_set_encoding(gchanpipe, NULL, NULL);
