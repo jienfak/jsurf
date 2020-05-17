@@ -48,7 +48,7 @@ install : $TGT $WETGT
 	cp -f $WETGT $LIBDIR
 	chmod 644 $LIBDIR/$WETGT
 	sed s/VERSION/$VERSION/g < $NAME.1 > $MANROOT/$NAME.1
-	chmod 644 $ROOT/share/man1/$NAME.1
+	chmod 644 $MANROOT/$NAME.1
 uninstall: 
 	rm -f $ROOT/share/man/man1/$TGT.1 $ROOT/bin/$TGT \
 		$LIBDIR/$WETGT
